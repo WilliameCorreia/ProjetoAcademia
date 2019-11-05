@@ -8,11 +8,18 @@
 }
   
 .example-full-width {
-  width: 100%;
+  margin: 5%;
+  font-size: 1em;
 }
 .card-body {
   text-align: -webkit-center;
+  margin-bottom: 1em;
 }
 .card-header-danger{
   text-align: center;
+}
+.mat-raised-button{
+  width: 100%;
+  background-color: #ee4f4c;
+  font-size: 1.5em;
 }
