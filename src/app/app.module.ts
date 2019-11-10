@@ -16,7 +16,7 @@ import {
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatInputModule} from '@angular/material/input';
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './login/login.component';
 
 @NgModule({
   imports: [

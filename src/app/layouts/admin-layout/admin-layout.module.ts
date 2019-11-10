@@ -20,7 +20,7 @@ import {
   MatTooltipModule,
   MatSelectModule
 } from '@angular/material';
-import { AuthComponent } from 'app/auth/auth.component';
+import { AuthComponent } from 'app/login/login.component';
 @NgModule({
   imports: [
     CommonModule,
