@@ -11,14 +11,14 @@
                     <form class="example-form">
                         <mat-form-field class="example-full-width">
                           <mat-icon matSuffix>account_circle</mat-icon>
-                          <input matInput placeholder="Nome">
+                          <input [(ngModel)]="user.userName" matInput placeholder="Nome" name="nome">
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width">
                             <mat-icon matSuffix>lock</mat-icon>
-                            <input type="password" matInput placeholder="Senha">
+                            <input [(ngModel)]="user.password" type="password" matInput placeholder="Senha" name="senha">
                         </mat-form-field>
-                        <a mat-raised-button routerLink="dashboard">Login</a>
+                        <a mat-raised-button (click)="onLogout()">Login</a>
                       </form>
                   </div>
               </div>

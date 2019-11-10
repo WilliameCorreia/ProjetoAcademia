@@ -20,7 +20,6 @@ import {
   MatTooltipModule,
   MatSelectModule
 } from '@angular/material';
-import { AuthComponent } from 'app/login/login.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,7 +41,7 @@ import { AuthComponent } from 'app/login/login.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent,
+    UpgradeComponent
   ]
 })
 

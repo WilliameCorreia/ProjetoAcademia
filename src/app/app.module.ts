@@ -16,7 +16,9 @@ import {
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatInputModule} from '@angular/material/input';
-import { AuthComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   imports: [
@@ -37,9 +39,9 @@ import { AuthComponent } from './login/login.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthComponent
+    LoginComponent
   ],
-  providers: [],
+  providers: [ AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
