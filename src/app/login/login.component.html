@@ -1,28 +1,38 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-6 ml-auto mr-auto">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h2 class="card-title">Projeto Academia</h2>
-                      <h3 class="card-category">Login</h3>
-                  </div>
-                  <div class="card-body">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width">
-                          <mat-icon matSuffix>account_circle</mat-icon>
-                          <input [(ngModel)]="user.userName" matInput placeholder="Nome" name="nome">
-                        </mat-form-field>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 ml-auto mr-auto">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h2 class="card-title">Projeto Academia</h2>
+                        <h3 class="card-category">Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form">
+                            <mat-error *ngIf="isInvalid()">
+                                {{MessageFireBase}}
+                            </mat-error>
+                            <mat-form-field class="example-full-width">
+                                <mat-icon matSuffix>account_circle</mat-icon>
+                                <input formControlName="userName" matInput placeholder="Nome" name="nome" required>
+                                <mat-error *ngIf="isFieldInvalid('userName')">
+                                    Por favor Informe seu usuario (exemplo@gmail.com)
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field class="example-full-width">
-                            <mat-icon matSuffix>lock</mat-icon>
-                            <input [(ngModel)]="user.password" type="password" matInput placeholder="Senha" name="senha">
-                        </mat-form-field>
-                        <a mat-raised-button (click)="onLogout()">Login</a>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                            <mat-form-field class="example-full-width">
+                                <mat-icon matSuffix>lock</mat-icon>
+                                <input formControlName="password" type="password" matInput placeholder="Senha"
+                                    name="senha" required>
+                                <mat-error *ngIf="isFieldInvalid('password')">
+                                    Por favor Informe sua senha
+                                </mat-error>
+                            </mat-form-field>
+                            <button mat-raised-button>Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
