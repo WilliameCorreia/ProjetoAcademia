@@ -4,7 +4,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 /* const routes: Routes =[
   {
@@ -22,9 +23,10 @@ import { AuthComponent } from './auth/auth.component';
 ]; */
 
 const routes: Routes = [
-  {path: '', component: AuthComponent},
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {
-    path: '', component: AdminLayoutComponent,
+    path: '', component: AdminLayoutComponent, canActivate: [AuthGuard],
     children:[{
       path:'', loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
     }]
