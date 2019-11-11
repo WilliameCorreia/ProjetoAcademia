@@ -11,9 +11,14 @@ import { error } from '@angular/compiler/src/util';
 export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  private Validation = new BehaviorSubject<String>("");
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
+  }
+
+  get IsValidation(){
+    return this.Validation.asObservable();
   }
 
   constructor(
@@ -25,21 +30,12 @@ export class AuthService {
   login(user: User){
     
     this.db.auth.signInWithEmailAndPassword(user.userName, user.password).then((x)=> {
-      console.log(x);
       this.loggedIn.next(true);
       this.router.navigate(['/dashboard']);
     })
       .catch((error)=>{
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+        this.Validation.next(error.code);
     });
-    /* if (user.userName !== '' && user.password !== '' ) { // {3}
-      this.loggedIn.next(true);
-      console.log("entrou aqui!");
-      this.router.navigate(['/dashboard']);
-    } */
   }
 
   logout() {                            // {4}
