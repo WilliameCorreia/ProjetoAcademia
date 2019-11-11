@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     
   }
 
-
   onLogout(){
     console.log(this.user);
     this.authservice.login(this.user);
