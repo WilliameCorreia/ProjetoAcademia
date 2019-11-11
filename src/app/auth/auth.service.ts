@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from './user'
 import { AngularFireAuth } from '@angular/fire/auth';
-import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,7 @@ export class AuthService {
     });
   }
 
-  logout() {                            // {4}
+  logout() {
     this.loggedIn.next(false);
     console.log("entrou aqui!");
     this.router.navigate(['']);
