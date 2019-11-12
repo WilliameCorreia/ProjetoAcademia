@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -44,7 +46,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   declarations: [
     AppComponent,
