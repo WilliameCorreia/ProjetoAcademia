@@ -12,6 +12,10 @@
                             <mat-error *ngIf="isInvalid()">
                                 {{MessageFireBase}}
                             </mat-error>
+                            <div *ngIf="Load()">
+                                <mat-progress-spinner [mode]='mode' [color]="color" [diameter]="diameter">
+                                </mat-progress-spinner>
+                            </div>
                             <mat-form-field class="example-full-width">
                                 <mat-icon matSuffix>account_circle</mat-icon>
                                 <input formControlName="userName" matInput placeholder="Nome" name="nome" required>
@@ -28,6 +32,7 @@
                                     Por favor Informe sua senha
                                 </mat-error>
                             </mat-form-field>
+
                             <button mat-raised-button>Login</button>
                         </form>
                     </div>

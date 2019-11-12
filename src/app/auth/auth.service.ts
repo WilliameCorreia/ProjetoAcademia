@@ -33,7 +33,20 @@ export class AuthService {
       this.router.navigate(['/dashboard']);
     })
       .catch((error)=>{
-        this.Validation.next(error.code);
+        let message: string;
+        switch (error.code) {
+          case "auth/user-not-found": message = "Usúario não encontrado!";
+            break;
+          case "auth/invalid-email":  message = "Usúario/E-mail inválido!";
+            break;
+          case "auth/wrong-password": message = "Senha inválida!";
+            break;
+        
+          default: message = "Dados inválidos";
+            break;
+        }
+
+        this.Validation.next(message);
     });
   }
 

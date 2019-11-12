@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +9,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
+
+  //spiner
+  color = 'warn';
+  mode = 'indeterminate';
+  diameter = 20;
+
   form: FormGroup;
   private formSubmitAttempt: boolean;
-  MessageFireBase: String = ""; 
+  MessageFireBase: String = "";
+
+  private load: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,14 +33,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(){
-    if(this.form.valid){
+  onSubmit() {
+    
+    if (this.form.valid) {
+      this.load = true;
       this.authservice.login(this.form.value);
+      this.formSubmitAttempt = true;
+      this.authservice.IsValidation.subscribe((message) => {  
+        this.MessageFireBase = message;
+      });
     }
-    this.formSubmitAttempt = true;
-    this.authservice.IsValidation.subscribe((message)=>{
-      this.MessageFireBase = message;
-    }); 
+
   }
 
   isFieldInvalid(field: string) {
@@ -42,9 +53,13 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  isInvalid(){
+  isInvalid() {
     return (
       (this.MessageFireBase != "")
     );
+  }
+
+  Load() {
+    return (this.MessageFireBase == "" && this.load);
   }
 }
