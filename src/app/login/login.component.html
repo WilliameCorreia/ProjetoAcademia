@@ -18,7 +18,7 @@
                             </div>
                             <mat-form-field class="example-full-width">
                                 <mat-icon matSuffix>account_circle</mat-icon>
-                                <input formControlName="userName" matInput placeholder="Nome" name="nome" required>
+                                <input (change)="ClearMsn()"  formControlName="userName" matInput placeholder="Nome" name="nome" required>
                                 <mat-error *ngIf="isFieldInvalid('userName')">
                                     Por favor Informe seu usuario (exemplo@gmail.com)
                                 </mat-error>
@@ -26,7 +26,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-icon matSuffix>lock</mat-icon>
-                                <input formControlName="password" type="password" matInput placeholder="Senha"
+                                <input (change)="ClearMsn()" formControlName="password" type="password" matInput placeholder="Senha"
                                     name="senha" required>
                                 <mat-error *ngIf="isFieldInvalid('password')">
                                     Por favor Informe sua senha

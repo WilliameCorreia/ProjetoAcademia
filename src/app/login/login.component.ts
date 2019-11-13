@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/auth/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   private formSubmitAttempt: boolean;
-  MessageFireBase: String = "";
-
-  private load: boolean = false;
+  
+  MessageFireBase: String;
+  private Spinnerload: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.MessageFireBase = null;
+    this.Spinnerload = false;
     this.form = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
@@ -34,15 +36,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    this.Spinnerload = true;
+    this.MessageFireBase = null;
     if (this.form.valid) {
-      this.load = true;
       this.authservice.login(this.form.value);
-      this.formSubmitAttempt = true;
-      this.authservice.IsValidation.subscribe((message) => {  
-        this.MessageFireBase = message;
-      });
-    }
+  }
+
+    this.formSubmitAttempt = true;
+
+    this.authservice.IsValidation.subscribe((message) => {
+      this.MessageFireBase = message;
+    });
 
   }
 
@@ -55,11 +59,21 @@ export class LoginComponent implements OnInit {
 
   isInvalid() {
     return (
-      (this.MessageFireBase != "")
+      (this.MessageFireBase != null)
     );
   }
 
   Load() {
-    return (this.MessageFireBase == "" && this.load);
+    return (this.MessageFireBase == null && this.Spinnerload);
   }
+
+  ClearMsn(){
+    if(!isNull(this.MessageFireBase)){
+        this.authservice.SetValidation(null);
+        this.Spinnerload = false;
+      console.log(this.MessageFireBase);  
+    }
+    
+  }
+
 }

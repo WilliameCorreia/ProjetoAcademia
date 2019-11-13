@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
-  private Validation = new BehaviorSubject<String>("");
+  private Validation = new BehaviorSubject<String>(null);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
@@ -18,6 +18,10 @@ export class AuthService {
 
   get IsValidation(){
     return this.Validation.asObservable();
+  }
+
+  SetValidation(x){
+    this.Validation.next(x);
   }
 
   constructor(
@@ -30,6 +34,7 @@ export class AuthService {
     
     this.db.auth.signInWithEmailAndPassword(user.userName, user.password).then((x)=> {
       this.loggedIn.next(true);
+      this.Validation.next(null);
       this.router.navigate(['/dashboard']);
     })
       .catch((error)=>{
